@@ -2,6 +2,7 @@
 #define CESAR_H
 
 #include <string>
+
 using namespace std;
 
 class Cesar{
@@ -18,10 +19,12 @@ Cesar::Cesar(){}
 
 string Cesar::cifrado(string mensaje){
     string cifrado ;
-    for(int i = 0 ; i < mensaje.size() ; i++){
-        int pos = abc.find(mensaje[i]) ;
+    int size = mensaje.size();
+    for(int i = 0 ; i < size ; i++){
+        int pos = abc.find(mensaje[i]);
         pos += clave;
-        pos %= size_abc;
+        if (pos > abc_size)
+            pos = modulo(pos ,abc_size);
         cifrado += abc[pos];
     }
     return cifrado;
@@ -29,10 +32,12 @@ string Cesar::cifrado(string mensaje){
 
 string Cesar::descifrado(string mensaje){
     string descifrado ;
-    for(int i = 0 ; i < mensaje.size() ; i++){
+    int size = mensaje.size();
+    for(int i = 0 ; i < size ; i++){
         int pos = abc.find(mensaje[i]) ;
         pos -= clave;
-        pos %= size_abc;
+        if (pos < 0)
+            pos = modulo(pos ,abc_size);
         descifrado += abc[pos];
     }
     return descifrado;
