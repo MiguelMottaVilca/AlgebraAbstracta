@@ -1,3 +1,6 @@
+#ifndef TOOLS_H
+#define TOOLS_H
+
 #include <iostream>
 
 using namespace std;
@@ -25,3 +28,6 @@ int euclides(int num ,int d ){
 
 // int euclidesExtend(int num , int d){  
 // }
+
+
+#endif //TOOLS_H
