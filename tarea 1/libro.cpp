@@ -5,16 +5,17 @@
 using namespace std;
 
 string abc = "abcdefghijklmnopqrstuvwxyz";
+int size_abc = abc.size();
 
 //ejercicio 7
 
 string Rot13(string mensaje , int key ){
-    string cifrado = mensaje;
+    string cifrado ;
     for(int i = 0 ; i <= cifrado.size() ; i++){
         int pos = abc.find(mensaje[i]) ;
         pos += key;
-        pos %= 26;
-        cifrado[i] = abc[pos];
+        pos %= size_abc;
+        cifrado = abc[pos];
     }
     return cifrado;
 }
@@ -67,38 +68,69 @@ void dibujo(int num){
     }
 }
 
-void ahorcado(){
-    string palabra = "hola" , tem;
-    tem = palabra;
-
-    for (int i = 0 ; i < palabra.size() ; i++)
-        tem[i] = abc[23] ;
-    
+void ahorcado1(string palabra){
+    string tem = palabra;
+    tem.append(palabra.size(),'X');
     cout << tem << endl;
 
-    int contador = 0;
-    while ( contador < 7){
+    int vida = 7;
+    bool perder_vida = true; 
+    while ( vida != 0 or tem == palabra){
         string aux;
         cout <<"ingresar una letra: ";cin >> aux;
         for(int i = 0 ; i < palabra.size() ; i++ ){
-            if( aux[0] == palabra[i]){
+            if( palabra[i] == aux[0] ){
                 tem[i] = palabra[i];
-                cout <<'\n'<< tem << endl;
-                cout <<"si"<< endl;
-                contador--;
+                perder_vida = false;
             }    
         }
-        if(palabra == tem ){
-            string aux;
-            cout << "Felicidades!!! Adivino mi palabra. Desea jugar otra vez? si/no" << endl; cin >> aux;
-            if (aux == "si" )
-                ahorcado();
-            else
-                break;
+        if (perder_vida == true){
+            vida --;
+            dibujo(vida);
         }
-        contador++;
-        dibujo(contador);
+        else {
+            cout << endl << "SI" << endl;
+        }        
     }
+    if (vida > 0 ){
+        string aux;
+        cout << "Felicidades!!! Adivino mi palabra. Desea jugar otra vez? si/no" << endl; cin >> aux;
+            if (aux == "si" )
+                ahorcado("palabra"); //añadir buscador
+    }
+}
+
+void ahorcado2(string palabra){
+    string oculto , copia = palabra ;
+    oculto.append(palabra.size(),'X');
+   
+    int vida = 7 ;
+    
+    while(vida != 0 or (copia == oculto) ){
+        string tem;
+        cout <<"Digite letra: "; cin>>tem;
+        bool perder_vida = true;
+        int pos = palabra.find(tem) ;
+        
+        while( pos + 1 ){
+            oculto[pos] = copia[pos];
+            palabra.erase(pos,1);
+            
+            pos = copia.find(tem);
+            perder_vida = false;
+        }
+        if (perder_vida == true){
+            vida--;
+        }
+        cout <<"adivinar:" <<oculto << endl;
+        cout <<"copia: " <<copia << endl ;
+        cout <<"palabra: "<<palabra << endl;
+        cout << endl;
+    }
+    if (vida > 0)
+        cout << "ganaste" <<endl;
+    else
+        cout <<"perdiste" << endl; 
 }
 
 //ejercicio 19 
