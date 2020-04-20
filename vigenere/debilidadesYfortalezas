@@ -1,0 +1,13 @@
+a. Cuáles son las debilidades y fortalezas del cifrado de Cesar (cifrado monoalfabético)
+    debilidades:
+        El cifrado de cesar al ser muy facil su implementacion  
+        Es muy facil poder romperlo debido a que su clave es estatica 
+    fortalezas:
+        si el cifrado de cesar para encriptar usariamos claves mas grandes podría ser un mas difícil de romperlo
+
+b. Cuáles son las debilidades y fortalezas del cifrado de Vigenere (cifrado polialfabético)
+    debilidades:
+        el cifrado de Vigenere se puede encontrar un patron para romperlo debido a que se realizan repeticiones
+    fortalezas:
+        El cifrado de Vigenere es más seguro que el cesar debido a que su clave no es estática o un numero especifico 
+        y tiene más maneras de porder cifrar
