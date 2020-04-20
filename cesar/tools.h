@@ -6,12 +6,13 @@
 using namespace std;
 
 int modulo(int num , int d ){
-    if ( num < d ){
-        return d + num ;
-    }
     int c , r;
     c = num / d ;
     r = num - ( c * d );
+    if (r < 0){
+        c -= 1 ; 
+        r = r + d ;
+    }
     return r ;
 }
 
