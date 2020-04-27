@@ -16,15 +16,15 @@ int modulo(int num , int d ){
     return r ;
 }
 
-int euclides(int num ,int d ){
-    int r = 1;
-
-    while (r > 0){
-        r  = modulo( num , d);
-        num = d ;
+int euclides(int num , int d){
+    int r = modulo(num,d);
+    while(r > 0){
+        cout << "vuelta nuevo" << endl;
+        num = d;
         d = r;
+        r = modulo(num,d);
     }
-    return num ;
+    return d;
 }
 
 // int euclidesExtend(int num , int d){  
