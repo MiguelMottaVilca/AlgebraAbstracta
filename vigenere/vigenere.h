@@ -76,5 +76,40 @@ string Vigenere::descifradoAutoClave(string mensaje ,string clave){
     return cifrado;
 }
 
+string Vigenere::cifradoAscii(string mensaje , string clave){
+    string cifrado ;
+    int mensaje_size = mensaje.size(), clave_size = clave.size() , pos_mensaje , pos_clave , aux;
+    for(int i = 0 ; i < mensaje_size ; i++ ){
+        pos_mensaje = abc.find(mensaje[i]);
+        pos_mensaje += 32; // codigo ascii
+        pos_clave = abc.find(clave[ modulo(i,clave_size) ]);
+        pos_clave += 32; // codigo ascii
+        aux = pos_mensaje + pos_clave;
+        aux = modulo(aux,abc_size + 32);
+        if (aux < 32)
+            aux += abc_size + 1 ;
+        aux -=32;
+        cifrado += abc[aux];
+    }
+    return cifrado;
+}
+
+string Vigenere::descifradoAscii(string mensaje , string clave){
+    string cifrado ;
+    int mensaje_size = mensaje.size(), clave_size = clave.size() , pos_mensaje , pos_clave , aux;
+    for(int i = 0 ; i < mensaje_size ; i++ ){
+        pos_mensaje = abc.find(mensaje[i]);
+        pos_mensaje += 32; // codigo ascii
+        pos_clave = abc.find(clave[ modulo(i,clave_size) ]);
+        pos_clave += 32; // codigo ascii
+        aux = pos_mensaje - pos_clave;
+        aux = modulo(aux,abc_size + 32);
+        if (aux < 32)
+            aux += abc_size + 1 ;
+        aux -=32;
+        cifrado += abc[aux];
+    }
+    return cifrado;
+}
 
 #endif //VIGENERE_H
