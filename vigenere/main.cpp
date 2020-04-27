@@ -6,6 +6,7 @@ using namespace std;
 
 string abc = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ,.";
 //string abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+// string abc;
 
 int abc_size = abc.size();
 
@@ -25,6 +26,13 @@ void tres_e(string &mensaje){
 
 
 int main(){
+    /*llenado de abc con ascii*/
+    // for (int i = 32 ; i <= 126 ;i++ ){
+    //     string aux(1,i);
+    //     abc +=aux;
+    // }
+    // abc_size=abc.size();
+    
 
     Vigenere emisor;
     Vigenere receptor;
