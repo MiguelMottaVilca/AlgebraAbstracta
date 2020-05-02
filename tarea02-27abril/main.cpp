@@ -1,48 +1,40 @@
-#include <iostream>
-#include "tools.h"
+#include <NTL/ZZ.h>
 
 using namespace std;
+using namespace NTL;
 
+#include "tools.h"
 
-int algoritmo1(int a , int b){
-    while(true){
-        int r = modulo(a,b);
-        if(r == 0)
-         return b ;
-
+ZZ algoritmo1(ZZ a , ZZ b){
+    ZZ r = modulo(a,b);
+    while(r > 0){
         a = b;
         b = r;
-        cout << "a % b = " << r <<endl;
-        cout << "a = " << a << endl;
-        cout <<"b = " << b << endl;
+        r = modulo(a,b);
     }
+    return b ;
 }
 
-int algoritmo2(int a ,int b){
-    while(true){
-        int r = modulo(a,b);
-        cout << "a % b = " << r <<endl;
-        if(r == 0)
-            return b ;
-        
+ZZ algoritmo2(ZZ a ,ZZ b){
+    ZZ r = modulo(a,b);
+    while(r > 0){
         if (r > (b/2) )
             r = b - r;
         a = b;
         b = r;
-        cout << "a = " << a << endl;
-        cout <<"b = " << b << endl;
+        r = modulo(a,b);
     }
-
+    return b ;
 }
 
 /*---------  ejercicio3 --------*/
-int euclidesmcd(int a,int b){
+ZZ euclidesmcd(ZZ a,ZZ b){
     if (b == 0)
         return a;
     return euclidesmcd(b, modulo(a,b));
 }
 
-int algoritmo4(int a, int b){
+ZZ algoritmo4(ZZ a, ZZ b){
   if(valorAbsoluto(b) > valorAbsoluto(a))
     return algoritmo4(b,a);
   if(b==0)
@@ -56,33 +48,28 @@ int algoritmo4(int a, int b){
   return algoritmo4( (valorAbsoluto(a)- valorAbsoluto(b) )/2,b );
 }
 
-int algoritmo5(int a , int b){
-    int g = 1 ;
-    while((  (!modulo(a,2))    and   (!modulo(b,2))   )){
-        a /= 2;
-        b /= 2;
+ZZ algoritmo5(ZZ a , ZZ b){
+    ZZ g(1);
+    while(!(modulo(a,2)) && !(modulo(b,2))){
+        a/=2;
+        b/=2;
         g*=2;
     }
-    while(a != 0){
-        a /= 2; 
-        // cout << "a = " <<a <<endl;
-        }
-          
-    while( b != 0){
-        b /= 2;
-        // cout << "b = " <<b <<endl;
-        }
-
-    int t = (a - b)/2; 
-    if (a >= b)
-        a = t;
-    else
-        b = t;
-    
-    return g*b;   
+    while(a!=0){
+        while(!(modulo(a,2)))
+            a/=2; 
+        while(!(modulo(b,2)))
+            b/=2;    
+        ZZ t = valorAbsoluto(a-b)/2;
+        if(a>=b)
+            a = t;
+        else
+            b = t;
+    }
+    return g*b;
 }
 
-int algoritmo6(int a , int b){
+ZZ algoritmo6(ZZ a , ZZ b){
 
     while(a != b){
         if (a >b)
@@ -93,18 +80,19 @@ int algoritmo6(int a , int b){
     return a;
 }
 
-
-
-
 int main(){
 
-    int a = 412 , b = 260;
-    //cout <<"algoritmo 1: " << algoritmo1(a,b) << endl;
+    ZZ a , b ;
+
+    cout << "a : "; cin >> a;
+    cout << "b : "; cin >> b;
+
+    cout <<"algoritmo 1: " << algoritmo1(a,b) << endl;
     //cout <<"algoritmo 2: " << algoritmo2(a,b) << endl;
     //cout <<"algoritmo 3: " << euclidesmcd(a,b) << endl;
     //cout <<"algoritmo 4: " << algoritmo4(a,b) <<endl;
-    //cout <<"algoritmo 5: " << algoritmo5(a,b) << endl;
-     cout <<"algoritmo 6: " << algoritmo6(a,b) << endl;
+    // cout <<"algoritmo 5: " << algoritmo5(a,b) << endl;
+    //cout <<"algoritmo 6: " << algoritmo6(a,b) << endl;
 
 
     return 0;
