@@ -1,37 +1,33 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-#include <iostream>
-#include <vector>
-
 using namespace std;
+using namespace NTL;
 
-int modulo(int num , int d ){
-    int c , r;
+ZZ modulo(ZZ num , ZZ d ){
+    ZZ c , r;
     c = num / d ;
     r = num - ( c * d );
-    if (r < 0){
-        c -= 1 ; 
+    if (r < 0)
         r = r + d ;
-    }
     return r ;
 }
 
-int valorAbsoluto(int a){
+ZZ modulo(ZZ num , int d ){
+    ZZ c , r;
+    c = num / d ;
+    r = num - ( c * d );
+    if (r < 0)
+        r = r + d ;
+    return r ;
+}
+
+ZZ valorAbsoluto(ZZ a){
     if ( a < 0)
         a *=-1;
     return a;
 }
 
-int euclides(int num , int d){
-    int r = modulo(num,d);
-    while(r > 0){
-        cout << "vuelta nuevo" << endl;
-        num = d;
-        d = r;
-        r = modulo(num,d);
-    }
-    return d;
-}
+
 
 #endif //TOOLS_H
