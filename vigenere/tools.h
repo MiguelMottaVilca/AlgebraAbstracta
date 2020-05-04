@@ -63,5 +63,23 @@ vector <int> euclideanExtended(int a, int b) {
     return res;
 }
 
+int division(int a, int n){
+    int q = 0;
+    
+    if(a > 0){
+        while(a >= n){
+            a -= n;
+            q++;
+        }
+    }
+    else{
+        while(a <= n){
+            a += n;
+            q--;
+        }
+        q++;
+    }
+    return q;
+}
 
 #endif //TOOLS_H
