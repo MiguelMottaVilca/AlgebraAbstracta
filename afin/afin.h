@@ -6,51 +6,62 @@
 using namespace std;
 
 class Afin{
+    int a , b;
+    public:
     Afin();
-    string cifrado(string mensaje , int multiplicacion , int desplazamiento);
-    string descifrado(string mensaje ,int multiplicacion , int desplazamiento);
-
+    Afin(int , int);
+    void generarClaves();
+    string cifrado(string);
+    string descifrado(string);
 };
 
 Afin::Afin(){
-    int xyz = 0;
+     generarClaves();
 }
 
-string Afin::cifrado(string mensaje ,int multiplicacion , int desplazamiento){
+Afin::Afin(int a, int b){
+    this -> a = inversa(a,abc_size);
+    this -> b = b;
+}
+
+void Afin::generarClaves(){
+    a = 1+rand()%(abc_size-1) ;
+    int tem = euclides( a , abc_size);
+    while( tem != 1){
+        a = 1+rand()%(abc_size-1);
+        tem = euclides( a , abc_size);   
+    }
+    b = 1+rand()%(abc_size-1) ;
+    cout <<"CLAVE GENERADA    a: " << a <<"   b: "<< b << endl;
+}
+
+string Afin::cifrado(string mensaje){
     string cifrado ;
-    int size = mensaje.size();   // C = a x m + b    mod n  
-    for(int i = 0 ; i < size ; i++){
-        int pos = abc.find(mensaje[i]);
-        pos = pos * multiplicacion + desplazamiento ;
+    int size =  mensaje.size() , pos;
+    for(int i = 0  ; i < size ; i++ ){
+        pos  = abc.find(mensaje[i]);
+        pos = pos*a + b;
         if (pos > abc_size)
-            pos = modulo(pos ,abc_size);
-        cifrado += abc[pos];
+            pos = modulo(pos,abc_size);
+        cifrado += abc[pos]; 
     }
     return cifrado;
 }
 
-string Afin::descifrado(string mensaje ,int multiplicacion , int desplazamiento){
+string Afin::descifrado(string mensaje){
+    cout <<"    a: " << a <<"   b: "<< b << endl;
     string descifrado ;
-    int size = mensaje.size();
-
-    if ( euclides( multiplicacion , size) != 1){
-        descifrado = "NO SE PUDO DESCIFRAR EL MENSAJE";
-        return descifrado;
-    }
-        
-    int inversa = ( multiplicacion , abc_size);
-
+    int size = mensaje.size() , pos;
     for(int i = 0 ; i < size ; i++){
-        int pos = abc.find(mensaje[i]) ;
-        pos -= desplazamiento;
-        pos *= inversa;
-        if (pos < 0)
-            pos = modulo(pos ,abc_size);
+        pos = abc.find(mensaje[i]);
+        pos -= b;
+        pos *= a; 
+        // if( pos < 0)
+            pos = modulo(pos,abc_size);
         descifrado += abc[pos];
     }
     return descifrado;
 }
-
 
 
 #endif //Afin_H
