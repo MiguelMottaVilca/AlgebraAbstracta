@@ -27,9 +27,8 @@ Afin::Afin(int a, int b){
 void Afin::generarClaves(){
     a = 1+rand()%(abc_size-1) ;
     int tem = euclides( a , abc_size);
-    while( tem != 1){
-        a = 1+rand()%(abc_size-1);
-        tem = euclides( a , abc_size);   
+    while( euclides(tem,abc_size) != 1){
+        tem = euclides( a , abc_size);
     }
     b = 1+rand()%(abc_size-1) ;
     cout <<"CLAVE GENERADA    a: " << a <<"   b: "<< b << endl;
@@ -41,8 +40,7 @@ string Afin::cifrado(string mensaje){
     for(int i = 0  ; i < size ; i++ ){
         pos  = abc.find(mensaje[i]);
         pos = pos*a + b;
-        if (pos > abc_size)
-            pos = modulo(pos,abc_size);
+        pos = modulo(pos,abc_size);
         cifrado += abc[pos]; 
     }
     return cifrado;
@@ -55,9 +53,8 @@ string Afin::descifrado(string mensaje){
     for(int i = 0 ; i < size ; i++){
         pos = abc.find(mensaje[i]);
         pos -= b;
-        pos *= a; 
-        // if( pos < 0)
-            pos = modulo(pos,abc_size);
+        pos *= a;
+        pos = modulo(pos,abc_size);
         descifrado += abc[pos];
     }
     return descifrado;
