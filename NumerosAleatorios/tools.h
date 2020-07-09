@@ -1,7 +1,6 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-// #include <iostream>
 using namespace std;
 using namespace NTL;
 
@@ -106,6 +105,20 @@ ZZ stringToZZ(string cadena){
 	return num;
 }
 
- 
+ZZ stringBits_ZZ(string num){
+    string uno = "01";
+    ZZ res {0}, tem {2};
+    string::iterator i = num.begin() , f = num.end() - 1;
+    if(*f ==uno[1])
+        res = 1;
+    f--;
+    while( f >= i){
+        if(*f == uno[1] )
+            res += tem;
+        f--;
+        tem*=2;
+    }
+    return res;
+}
 
 #endif //TOOLS_H
