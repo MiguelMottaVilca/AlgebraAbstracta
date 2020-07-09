@@ -1,7 +1,6 @@
 #ifndef ALEATORIOS_H
 #define ALEATORIOS_H
 
-// #include <iostream>
 using namespace std;
 using namespace NTL;
 
@@ -90,8 +89,5 @@ Vec <long> vecRan(){
     
     return numeros;
 }
-
-
-
 
 #endif //ALEATORIOS_H
