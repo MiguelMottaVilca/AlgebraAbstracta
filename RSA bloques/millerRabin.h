@@ -1,5 +1,5 @@
-#ifndef MIZZERRABIN_H
-#define MIZZERRABIN_H
+#ifndef MILLERRABIN_H
+#define MILLERRABIN_H
 
 using namespace std;
 using namespace NTL;
@@ -32,4 +32,4 @@ bool MillerRabin(ZZ p, int iteration) {
 }
 
 
-#endif //MIZZERRABIN_H
+#endif //MILLERRABIN_H
