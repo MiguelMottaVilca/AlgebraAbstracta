@@ -1,7 +1,6 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-// #include <iostream>
 using namespace std;
 using namespace NTL;
 
@@ -67,31 +66,24 @@ ZZ inversa(ZZ x , ZZ y ){
 
 ZZ pow(ZZ num ,ZZ n){
     if (n == 0){
-        ZZ aux{0};
+        ZZ aux{1};
         return  aux;
     }
     ZZ aux{num};
     for(long i = 1 ; i < n ;i++)
         aux *=num; 
-    return num;
+    return aux;
 }
 
-ZZ expModular(ZZ num , ZZ  n , ZZ mod){
-    if (n == 0) 
-        return ZZ(1);
-    ZZ exp {1} ;
-    ZZ x = modulo(num,mod);
-
-    while(n > 0){
-        if(modulo(n,ZZ(2)) ==  0){
-            exp = exp * x ;
-            exp = modulo(exp,mod);
-        }
-        x = x*x;
-        x = modulo(x,mod);
-        n /= 2; 
-    }
-    return exp;
+ZZ expModular(ZZ num, ZZ exp, ZZ mod){
+    ZZ res{1};
+    while (exp > 0) {
+      if (modulo(exp, ZZ(2)) == 1)
+         res= modulo((res * num),mod);
+      exp = exp >> 1;
+      num = modulo((num * num),mod);
+   }
+   return res;
 }
 
 string ZZtoString(const ZZ &z) {
@@ -106,6 +98,20 @@ ZZ stringToZZ(string cadena){
 	return num;
 }
 
- 
+ZZ stringBits_ZZ(string num){
+    string uno = "01";
+    ZZ res {0}, tem {2};
+    string::iterator i = num.begin() , f = num.end() - 1;
+    if(*f ==uno[1])
+        res = 1;
+    f--;
+    while( f >= i){
+        if(*f == uno[1] )
+            res += tem;
+        f--;
+        tem*=2;
+    }
+    return res;
+}
 
 #endif //TOOLS_H
