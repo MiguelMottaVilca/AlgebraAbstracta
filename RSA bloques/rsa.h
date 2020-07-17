@@ -43,11 +43,10 @@ void RSA::generarClaves(long bits){
     q = 59 ;
     n = p*q;
     ZZ fi_n = (p-1)*(q-1);
-    e = 3 ;
-    // e = rand() ;
-    // while(euclides(fi_n,e) != 1){
-        // e = rand() ;
-    // }
+    e = rand() ;
+    while(euclides(fi_n,e) != 1){
+        e = rand() ;
+    }
     d = inversa(e,fi_n);
 
 
